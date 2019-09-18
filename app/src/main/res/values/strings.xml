@@ -1,10 +1,8 @@
 <resources>
-    <string name="app_name">User_MySQL_Android_new</string>
+    <string name="app_name">User_MySQL</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="textName">Username</string>
-    <string name="textPassword">Userpassword</string>
+    <string name="textName">User name</string>
+    <string name="textPassword">User password</string>
     <string name="textSignIn">SIGN IN</string>
     <string name="textSignUp">SIGN UP</string>
 </resources>
