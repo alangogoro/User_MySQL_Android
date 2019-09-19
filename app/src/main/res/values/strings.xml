@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">User_MySQL</string>
+    <string name="app_name">User MySQL Sign</string>
 
     <string name="textName">User name</string>
     <string name="textPassword">User password</string>
     <string name="textSignIn">SIGN IN</string>
     <string name="textSignUp">SIGN UP</string>
+    <string name="textSignOut">SIGN OUT</string>
+    <string name="textResult">User MySQL Result</string>
 </resources>
