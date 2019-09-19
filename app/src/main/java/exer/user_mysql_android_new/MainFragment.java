@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import exer.task.Common;
 import exer.task.CommonTask;
 import exer.user.User;
 
@@ -61,12 +63,22 @@ public class MainFragment extends Fragment {
                 String password = etPassword.getText().toString();
                 User user = new User(name, password);
 
-                JsonObject jo = new JsonObject();
-                jo.addProperty("action", "findByUser");
-                jo.addProperty("user", new Gson.toJson(user));
 
-                loginTask = new CommonTask(URL_SERVER, jo.toString());
-                //textView.setText(user.getName()+"\n"+user.getPassword());
+                if(Common.networkConnected(activity)){
+                    JsonObject jo = new JsonObject();
+                    jo.addProperty("action", "findByUser");
+                    jo.addProperty("user", new Gson.toJson(user));
+                    try{
+                        loginTask = new CommonTask(URL_SERVER, jo.toString());
+                        String loginResult = loginTask.execute().get();
+                        boolean isUserValid = Boolean.valueOf(loginResult);
+
+                        //textView.setText(user.getName()+"\n"+user.getPassword());
+                    } catch (Exception e){
+                        Log.e(TAG, e.toString());
+                    }
+
+                }
 
             }
         });
