@@ -11,4 +11,7 @@
     <string name="textSignUpFail">Sign up failed...</string>
     <string name="textSignUpSuccess">Sign up finished!</string>
     <string name="textInvalidInput">Username or password is INVALID!</string>
+    <string name="textTakePicture">Cheese</string>
+    <string name="textNoCameraApp">No camera app found...</string>
+    <string name="textNoImageCropAppFound">No image crop app found...</string>
 </resources>

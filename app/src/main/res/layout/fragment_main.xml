@@ -12,39 +12,6 @@
         android:lauout_height="wrap_content"
         tools:ignore="MissingConstraints"> -->
 
-        <EditText
-            android:id="@+id/etName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="128dp"
-            android:ems="10"
-            android:hint="@string/textName"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    <!-- </android.support.disign.widget.TextInputLayout> -->
-
-    <!-- <android.support.disign.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:lauout_height="wrap_content"
-        tools:ignore="MissingConstraints"> -->
-
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="@string/textPassword"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etName" />
-    <!-- </android.support.disign.widget.TextInputLayout> -->
-
     <Button
         android:id="@+id/btSignIn"
         android:layout_width="0dp"
@@ -54,7 +21,13 @@
         app:layout_constraintEnd_toEndOf="@+id/etPassword"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/etPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword"/>
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+    <!-- </android.support.disign.widget.TextInputLayout> -->
+
+    <!-- <android.support.disign.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:lauout_height="wrap_content"
+        tools:ignore="MissingConstraints"> -->
 
     <Button
         android:id="@+id/btSignUp"
@@ -65,6 +38,53 @@
         app:layout_constraintEnd_toEndOf="@+id/btSignIn"
         app:layout_constraintStart_toStartOf="@+id/btSignIn"
         app:layout_constraintTop_toBottomOf="@+id/btSignIn" />
+    <!-- </android.support.disign.widget.TextInputLayout> -->
+
+    <Button
+        android:id="@+id/btTakePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textTakePicture"
+        app:layout_constraintBottom_toTopOf="@+id/ivUser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/textPassword"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etName" />
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:ems="10"
+        android:hint="@string/textName"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:src="@tools:sample/avatars[14]" />
 
     <TextView
         android:id="@+id/textView"
