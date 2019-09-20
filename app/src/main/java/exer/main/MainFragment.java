@@ -69,6 +69,7 @@ public class MainFragment extends Fragment {
         btSignUp = view.findViewById(R.id.btSignUp);
         textView = view.findViewById(R.id.textView);
 
+        /* 登入按鈕 */
         btSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +103,7 @@ public class MainFragment extends Fragment {
             }
         });
 
+        /* 註冊按鈕 */
         btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,6 +141,7 @@ public class MainFragment extends Fragment {
         });
     }
 
+    /* App 畫面停止時被執行 */
     @Override
     public void onStop() {
         super.onStop();
