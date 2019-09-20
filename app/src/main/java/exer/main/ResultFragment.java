@@ -39,6 +39,8 @@ public class ResultFragment extends Fragment {
         textView = view.findViewById(R.id.textView);
         btSignOut = view.findViewById(R.id.btSignOut);
 
+        // ReusltFragment DO
+
         btSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
