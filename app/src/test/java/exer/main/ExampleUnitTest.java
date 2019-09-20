@@ -1,4 +1,4 @@
-package exer.user_mysql_android_new;
+package exer.main;
 
 import org.junit.Test;
 
