@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +56,7 @@ public class MainFragment extends Fragment {
     private static final int REQ_TAKE_PICTURE = 0;
     private static final int REQ_PICK_PICTURE = 1;
     private static final int REQ_CROP_PICTURE = 2;
-    //private byte[] image;
+    private byte[] image;
     private Uri contentUri;
 
     @Override
@@ -128,28 +129,35 @@ public class MainFragment extends Fragment {
                             .show();
                     return;
                 }
-                User user = new User(name, password);
-
-                int count = 0;
 
                 if (Common.networkConnected(activity)){
+
+                    User user = new User(name, password);
 
                     JsonObject jo = new JsonObject();
                     jo.addProperty("action", "userInsert");
                     jo.addProperty("user", new Gson().toJson(user));
 
+                    if (image != null){
+                        jo.addProperty("imageBase64", Base64.encodeToString(image, Base64.DEFAULT));
+                    }
+                    int count = 0;
                     try{
                         signUpTask = new CommonTask(URL_SERVER, jo.toString());
                         String signUpResult = signUpTask.execute().get();
+                        /* signUpResult 新增成功的資料筆數
+                         * 因為是字串，需要轉回成 int 型態 */
                         count = Integer.valueOf(signUpResult);
                     } catch (Exception e){
                         Log.d(TAG, e.toString());
                     }
-                }
-                if (count == 0){
-                    textView.setText(R.string.textSignUpFail);
-                } else {
-                    textView.setText(R.string.textSignUpSuccess);
+                    if (count == 0){
+                        textView.setText(R.string.textSignUpFail);
+                    } else {
+                        textView.setText(R.string.textSignUpSuccess);
+                    }
+                } else{
+                    Toast.makeText(activity, R.string.textNoNetwork, Toast.LENGTH_SHORT);
                 }
             }
         });
@@ -206,12 +214,12 @@ public class MainFragment extends Fragment {
                             bitmap = BitmapFactory.decodeStream(
                                     activity.getContentResolver().openInputStream(uri));
                             ivUser.setImageBitmap(bitmap);
+
                             ByteArrayOutputStream out = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-
                             /* image 存著拍照完畢的結果 */
-                            byte[] image = out.toByteArray();
-                            // image = out.toByteArray();
+                            image = out.toByteArray();
+
                         } catch (FileNotFoundException e) {
                             Log.e(TAG, e.toString());
                         }
