@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -32,7 +33,7 @@ public class MainFragment extends Fragment {
     private Button btSignIn, btSignUp;
     private TextView textView;
 
-    private CommonTask loginTask;
+    private CommonTask loginTask, signUpTask;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,24 +63,30 @@ public class MainFragment extends Fragment {
                 String name = etName.getText().toString();
                 String password = etPassword.getText().toString();
                 User user = new User(name, password);
+                boolean isUserValid = false;
 
 
-                if(Common.networkConnected(activity)){
+                if (Common.networkConnected(activity)){
+
                     JsonObject jo = new JsonObject();
                     jo.addProperty("action", "findByUser");
-                    jo.addProperty("user", new Gson.toJson(user));
+                    jo.addProperty("user", new Gson().toJson(user));
+
                     try{
                         loginTask = new CommonTask(URL_SERVER, jo.toString());
                         String loginResult = loginTask.execute().get();
-                        boolean isUserValid = Boolean.valueOf(loginResult);
+                        isUserValid = Boolean.valueOf(loginResult);
 
-                        //textView.setText(user.getName()+"\n"+user.getPassword());
                     } catch (Exception e){
                         Log.e(TAG, e.toString());
                     }
-
                 }
-
+                if(isUserValid){
+                    Navigation.findNavController(textView)
+                            .navigate(R.id.action_mainFragment_to_resultFragment);
+                } else{
+                    textView.setText(R.string.textSignInFail);
+                }
             }
         });
 
@@ -88,10 +95,34 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
                 String name = etName.getText().toString();
                 String password = etPassword.getText().toString();
+                if (name.length() <= 0 || password.length() <= 0){
+                    Toast.makeText(activity, R.string.textInvalidInput, Toast.LENGTH_SHORT)
+                            .show();
+                    return;
+                }
                 User user = new User(name, password);
 
-                Navigation.findNavController(btSignUp)
-                        .navigate(R.id.action_mainFragment_to_resultFragment);
+                int count = 0;
+
+                if (Common.networkConnected(activity)){
+
+                    JsonObject jo = new JsonObject();
+                    jo.addProperty("action", "userInsert");
+                    jo.addProperty("user", new Gson().toJson(user));
+
+                    try{
+                        signUpTask = new CommonTask(URL_SERVER, jo.toString());
+                        String signUpResult = signUpTask.execute().get();
+                        count = Integer.valueOf(signUpResult);
+                    } catch (Exception e){
+                        Log.d(TAG, e.toString());
+                    }
+                }
+                if (count == 0){
+                    textView.setText(R.string.textSignUpFail);
+                } else {
+                    textView.setText(R.string.textSignUpSuccess);
+                }
             }
         });
     }

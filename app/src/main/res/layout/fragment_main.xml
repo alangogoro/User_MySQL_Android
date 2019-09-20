@@ -58,6 +58,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:textColor="@color/colorRed"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/btSignUp"
         app:layout_constraintStart_toStartOf="@+id/btSignUp"
