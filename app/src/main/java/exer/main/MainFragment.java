@@ -24,7 +24,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -47,11 +46,10 @@ public class MainFragment extends Fragment {
     private Button btSignIn, btSignUp;
     private TextView textView;
 
-    /* 連線使用資料庫變數 */
+    /* 連線資料庫做 登入或註冊 的新執行緒工作 */
     private CommonTask loginTask, signUpTask;
 
     /* 拍照方法使用變數 */
-//    private byte[] image;
     private ImageView ivUser;
     private static final int REQ_TAKE_PICTURE = 0;
     private static final int REQ_PICK_PICTURE = 1;
@@ -90,9 +88,8 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
                 String name = etName.getText().toString();
                 String password = etPassword.getText().toString();
-                User user = new User(name, password);
+                User user = new User(0, name, password);
                 boolean isUserValid = false;
-
 
                 if (Common.networkConnected(activity)){
 
@@ -125,14 +122,13 @@ public class MainFragment extends Fragment {
                 String name = etName.getText().toString();
                 String password = etPassword.getText().toString();
                 if (name.length() <= 0 || password.length() <= 0){
-                    Toast.makeText(activity, R.string.textInvalidInput, Toast.LENGTH_SHORT)
-                            .show();
+                    Common.showToast(activity, R.string.textInvalidInput);
                     return;
                 }
 
                 if (Common.networkConnected(activity)){
 
-                    User user = new User(name, password);
+                    User user = new User(0, name, password);
 
                     JsonObject jo = new JsonObject();
                     jo.addProperty("action", "userInsert");
@@ -157,7 +153,7 @@ public class MainFragment extends Fragment {
                         textView.setText(R.string.textSignUpSuccess);
                     }
                 } else{
-                    Toast.makeText(activity, R.string.textNoNetwork, Toast.LENGTH_SHORT);
+                    Common.showToast(activity, R.string.textNoNetwork);
                 }
             }
         });
@@ -178,7 +174,7 @@ public class MainFragment extends Fragment {
                 if (intent.resolveActivity(activity.getPackageManager()) != null) {
                     startActivityForResult(intent, REQ_TAKE_PICTURE);
                 } else {
-                    Toast.makeText(activity, R.string.textNoCameraApp, Toast.LENGTH_SHORT).show();
+                    Common.showToast(activity, R.string.textNoCameraApp);
                 }
             }
         });
@@ -263,8 +259,7 @@ public class MainFragment extends Fragment {
             // 開啟截圖 activity
             startActivityForResult(intent, REQ_CROP_PICTURE);
         } else {
-             Toast.makeText(activity, R.string.textNoImageCropAppFound,
-                    Toast.LENGTH_SHORT).show();
+            Common.showToast(activity, R.string.textNoImageCropAppFound);
         }
     }
 }

@@ -81,7 +81,7 @@ public class ResultFragment extends Fragment {
     }
 
     private List<User> getUsers() {
-        List<User> spots = null;
+        List<User> users = null;
         if (Common.networkConnected(activity)) {
             // 指定網址
             String url = Common.URL_SERVER;
@@ -189,19 +189,19 @@ public class ResultFragment extends Fragment {
          * 因為圖片體積太大所以選擇直到這裡才做載入 */
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
-            final User spot = users.get(position);
+            final User user = users.get(position);
             String url = Common.URL_SERVER;
 
             int id = user.getId();
             userImageTask = new ImageTask(url, id, imageSize, myViewHolder.ivUser);
+
             /* 不寫 execute().get()
              * 執行緒就不會等待執行結果，圖片會漸次載入 */
             userImageTask.execute();
 
-            myViewHolder.tvName.setText(spot.getName());
-            myViewHolder.tvPassword.setText(spot.getPassword());
+            myViewHolder.tvName.setText(user.getName());
+            myViewHolder.tvPassword.setText(user.getPassword());
 
-            /* ImageTask */
             /* User id Problem */
         }
 
