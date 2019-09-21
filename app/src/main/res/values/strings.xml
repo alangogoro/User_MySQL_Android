@@ -15,4 +15,5 @@
     <string name="textNoCameraApp">No camera app found...</string>
     <string name="textNoImageCropAppFound">No image crop app found...</string>
     <string name="textNoNetwork">No network available...</string>
+    <string name="textNoUsersFound">No users found</string>
 </resources>
