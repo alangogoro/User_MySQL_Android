@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class ResultFragment extends Fragment {
     private Activity activity;
     private TextView textView;
@@ -44,6 +46,14 @@ public class ResultFragment extends Fragment {
         btSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Navigation.findNavController(btSignOut).popBackStack();
+            }
+        });
+
+        FloatingActionButton btAdd = view.findViewById(R.id.btBack);
+        btAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Navigation.findNavController(btSignOut).popBackStack();
             }
         });
