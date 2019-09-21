@@ -166,12 +166,12 @@ public class ResultFragment extends Fragment {
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {
-            ImageView ivUser;
+            ImageView imageView;
             TextView tvName, tvPassword;
 
             MyViewHolder(View itemView) {
                 super(itemView);
-                ivUser = itemView.findViewById(R.id.ivUser);
+                imageView = itemView.findViewById(R.id.ivUser);
                 tvName = itemView.findViewById(R.id.tvName);
                 tvPassword = itemView.findViewById(R.id.tvPassword);
             }
@@ -193,7 +193,7 @@ public class ResultFragment extends Fragment {
             String url = Common.URL_SERVER;
 
             int id = user.getId();
-            userImageTask = new ImageTask(url, id, imageSize, myViewHolder.ivUser);
+            userImageTask = new ImageTask(url, id, imageSize, myViewHolder.imageView);
 
             /* 不寫 execute().get()
              * 執行緒就不會等待執行結果，圖片會漸次載入 */
